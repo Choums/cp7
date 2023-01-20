@@ -1,11 +1,11 @@
-NAME		= template
+NAME		= whatever
 
 # directories
 SRCDIR		=    ./src
 INCDIR		=    ./includes
 OBJDIR		=    ./obj
 
-HEADER		=	temp.hpp
+HEADER		=	whatever.hpp
 
 # src / obj files
 SRC			=	main.cpp
