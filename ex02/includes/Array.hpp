@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: chaidel <chaidel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:59:32 by root              #+#    #+#             */
-/*   Updated: 2023/01/24 23:49:09 by root             ###   ########.fr       */
+/*   Updated: 2023/01/26 18:58:02 by chaidel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <cstdlib>
+
 
 template<typename T>
 class Array
@@ -31,7 +33,7 @@ public:
 		@param Cette fonction membre ne prend aucun paramètre 
 		et ne doit pas modifier l’instance courante.
 	*/
-	unsigned int	size() const
+	unsigned int const&	size() const
 	{	return (this->_size); }
 
 		/*	Assignment Operator Overload */
@@ -47,17 +49,14 @@ public:
 		}
 		return (*this);
 	}
-
-	Array&	operator=(T value) // array[] = value
-	{
-		if (*this != obj)
-		{
-			this->_content[index] = value;
-		}
-		return (*this);
-	}
 	
-	T&	operator[](unsigned int index) {
+	T&			operator[](unsigned int index) {
+		if (index >= this->_size)
+			throw ArrayException();
+		else return (this->_content[index]);
+	}
+
+	T const&	operator[](unsigned int index) const {
 		if (index >= this->_size)
 			throw ArrayException();
 		else return (this->_content[index]);
@@ -68,11 +67,11 @@ private:
 	unsigned int	_size;
 	T*				_content;
 public:
-	class ArrayException : std::exception {
+	class ArrayException : public std::exception {
 		public:
 			ArrayException() throw() {};
 			virtual ~ArrayException() throw() {};
 			virtual const char* what() const throw()
-			{	return ("Invalid Index !\n"); };
+			{	return ("Invalid Index !"); };
 	};
 };

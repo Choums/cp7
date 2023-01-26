@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: chaidel <chaidel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:29:19 by root              #+#    #+#             */
-/*   Updated: 2023/01/20 14:53:07 by root             ###   ########.fr       */
+/*   Updated: 2023/01/26 18:50:09 by chaidel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	fi(T &value)
 	Le troisième paramètre peut être une fonction template instanciée.
 */
 
-template<typename T>
-void	iter(T tab[], size_t const size, void (*f)(T&))
+template<typename T, typename F>
+void	iter(T tab[], size_t const size, F var)
 {
-	if (size && f)
+	if (size && var)
 		for (size_t i(0); i < size; i++)
-			(*f)(tab[i]);
+			var(tab[i]);
 }
